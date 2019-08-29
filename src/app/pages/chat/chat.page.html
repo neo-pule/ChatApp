@@ -1,0 +1,18 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>chat</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  
+  <ion-button (click)="photo1()">Next</ion-button>
+<ion-button (click)="photo()">Take photo</ion-button>
+
+<ion-list *ngFor="let photo of photos">
+<ion-item>
+    <img src={{photo}} style="width: 200px; height: 150px;">
+</ion-item>
+
+  </ion-list>
+</ion-content>

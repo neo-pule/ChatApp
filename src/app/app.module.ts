@@ -13,8 +13,8 @@ import { AngularFireModule } from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { MenuComponent } from './page/menu/menu.component';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 
 
@@ -34,6 +34,8 @@ const firebaseConfig = {
   imports: [BrowserModule, IonicModule.forRoot(),AppRoutingModule,AngularFireModule.initializeApp(firebaseConfig),AngularFirestoreModule],
   providers: [
     StatusBar,
+    Camera,
+    File,
     SplashScreen,
     AngularFireAuth,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

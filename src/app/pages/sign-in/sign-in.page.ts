@@ -25,7 +25,7 @@ provider;
 
 IsDisabled :boolean =false;
 IsDisable :boolean =false;
-  constructor(public afAuth: AngularFireAuth,public router: Router) { 
+  constructor(public afAuth: AngularFireAuth,private router: Router) { 
      this.provider = new firebase.auth.GoogleAuthProvider();
    //this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('container');
   }
