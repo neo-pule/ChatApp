@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>signIn</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary" >
+  <a routerLink="/sign-up">register</a>
+
+
+
+
+<ion-card *ngIf="!IsDisabled; else login">
+
+    <ion-card-header>       
+        <ion-card-title>Sign In using</ion-card-title>
+    </ion-card-header>
+
+<ion-item>
+<ion-label position="floating">
+Phone Number
+</ion-label>
+<ion-input [(ngModel)]="phone"></ion-input>
+</ion-item>
+
+<ion-button expand="block" (click)="PhoneAuth()">Send OTP</ion-button>
+</ion-card>
+
+<div id="recaptcha-container"></div>
+
+<ng-template #login>
+  <ion-item>
+    <ion-label position="floating">
+    Enter Code
+    </ion-label>
+    <ion-input [(ngModel)]="code"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="continue()">Submit OTP</ion-button>
+</ng-template>
+
+<ion-slides>
+    <ion-slide>
+        <ion-card *ngIf="afAuth.auth.currentUser; else logi">
+          <p>{{user}}</p>
+              <ion-card-header>
+                 
+                  <ion-card-title>Sign In Annonymously</ion-card-title>
+              </ion-card-header>
+          
+              <ion-button expand="block" (click)="signAnnony()">Sign In Annonymously</ion-button>
+          </ion-card>
+      </ion-slide>
+  <ion-slide>
+    <ion-card *ngIf="!IsDisabled; else login">
+      <ion-card-header>
+          <ion-card-title>Sign In using</ion-card-title>
+      </ion-card-header>
+    
+    <ion-item>
+    <ion-label position="floating">
+    Email
+    </ion-label>
+    <ion-input></ion-input>
+    
+    </ion-item>
+    <ion-button expand="block" (click)="signInMail()">continue</ion-button>
+    </ion-card>
+  </ion-slide>
+ 
+</ion-slides>
+
+
+
+
+
+<ng-template #logi>
+  <h3>Welcome </h3>
+
+  <ion-button (click)="signOut()">Log Out</ion-button>
+</ng-template>
+
+  <ion-button routerLink="/sign-up">page 1</ion-button>
+</ion-content>
