@@ -4,9 +4,9 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content>
+<ion-content padding>
   
-  <ion-button (click)="photo1()">Next</ion-button>
+  <!-- <ion-button (click)="photo1()">Next</ion-button>
 <ion-button (click)="photo()">Take photo</ion-button>
 
 <ion-list *ngFor="let photo of photos">
@@ -14,5 +14,61 @@
     <img src={{photo}} style="width: 200px; height: 150px;">
 </ion-item>
 
-  </ion-list>
+  </ion-list> -->
+<!-- <div class="message my-msg" >
+
+  <h4>{{tem.name}}</h4>
+  <p>{{tem.userID}}</p>
+  <p>blah blah text ... </p>
+  <p>{{tem.message}}</p>
+  <div class="time" text-right>
+    <br>
+    {{tem.time | date : 'short'}}
+  </div>
+</div> -->
+  <ion-grid>
+    <ion-row >
+      <ion-col size="9" class="message other-msg" *ngFor="let tem of temp | async">
+        <h4>{{tem.name}}</h4>
+        <p>{{tem.userID}}</p>
+        <p>blah blah text ... </p>
+        <p>{{tem.message}}</p>
+        <div class="time" text-right>
+          <br>
+          {{tem.time}}
+        </div>
+      </ion-col>
+
+      <ion-col offset="3" size="9" class="message my-msg">
+        <h4>{{temp}}</h4>
+        <p>{{temp1}}</p>
+        <p>blah blah text ... </p>
+        <div class="time" text-right>
+          <br>
+          {{date | date : 'short'}}
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row>
+        <ion-col size="2" >
+            <ion-icon name="happy" (click)="sendEmj()"></ion-icon>
+          </ion-col>
+        
+      <ion-col size="8">
+       
+        <ion-textarea autosize maxRows="3"  [(ngModel)]="mess" class="msg-input">
+
+        </ion-textarea>
+      </ion-col>
+      <ion-col size="2" >
+          <ion-icon name="send" color="primary" (click)="sendMsg()" ></ion-icon>
+          
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

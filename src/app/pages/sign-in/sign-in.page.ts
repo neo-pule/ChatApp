@@ -3,9 +3,13 @@ import * as firebase from 'firebase';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User,auth } from 'firebase';
+import { Router } from '@angular/router';
 
-import { Router, RouterEvent, NavigationEnd  } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
+
+
+
+
 
 
 @Component({
@@ -22,14 +26,46 @@ phone;
 user1;
 code;
 provider;
-
+mail;
+pass;
 IsDisabled :boolean =false;
 IsDisable :boolean =false;
-  constructor(public afAuth: AngularFireAuth,private router: Router) { 
+  constructor(public data : Router,public afAuth: AngularFireAuth) { 
      this.provider = new firebase.auth.GoogleAuthProvider();
+     console.log(this.afAuth.auth.currentUser)
    //this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('container');
   }
 
+
+
+
+  route1(){
+    console.log(this.afAuth.auth.currentUser);
+    this.data.navigateByUrl("/sign-up");
+
+  }
+  logOut(){
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      console.log("user logged out successful ..")
+    }).catch(function(error) {
+      // An error happened.
+      console.log("error .. logging user out ..")
+    });
+}
+  signIN(){
+  
+    this.afAuth.auth.signInWithEmailAndPassword(this.mail, this.pass).then(error =>{
+      // Handle Errors here.
+      //var errorCode = error.code;
+      //var errorMessage = error.message;
+      console.log(error)
+      console.log("user logged In ..")
+      this.data.navigateByUrl("/about/first-page/chat");
+    
+      // ...
+    });
+  }
   signInMail(){
     this.IsDisable =true;
     firebase.auth().signInWithRedirect(this.provider);
@@ -41,6 +77,7 @@ IsDisable :boolean =false;
       }
       // The signed-in user info.
       var user = result.user;
+      this.data.navigateByUrl("/about/first-page")
       console.log("user signIn successful")
     }).catch(function(error) {
       // Handle Errors here.
@@ -62,6 +99,7 @@ IsDisable :boolean =false;
     return firebase.auth().signInWithPhoneNumber(this.phone, this.recaptchaVerifier).then( confirmationResult => {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
+      console.log("Great.. SMS sent");
       this.user1 = confirmationResult;
     }).catch(confirmationResult => {
       // Error; SMS not sent
@@ -74,6 +112,7 @@ IsDisable :boolean =false;
   }
   continue()
   {
+    console.log("good.. SMS sent");
     console.log(this.code);
     this.user1.confirm(this.code).catch( function(err){
 
@@ -83,6 +122,7 @@ IsDisable :boolean =false;
     
   });
   alert("User sign in successful")
+  this.data.navigateByUrl("/about/first-page");
   }
   signOut(){
     firebase.auth().signOut().then(function() {

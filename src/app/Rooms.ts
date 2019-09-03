@@ -1,6 +1,10 @@
 class Rooms  {
-    key ?: string;
-    sender : string;
-    recipient : Number;
+    userID ?: string;
+    email : string;
+   
     message : String;
+    name : string;
+    phoneNum : number;
+    time : Date;
+    
   }

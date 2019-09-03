@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { ChatServiceService } from '../chat-service.service';
 import { AngularFireModule } from '@angular/fire';
-import { Observable } from 'rxjs';
+
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User,auth } from 'firebase';
@@ -16,7 +16,8 @@ export class HomePage {
   user2;
   mess;
   name;
-  temp; //  : Observable<any[]>
+  temp;
+  temp1; //  : Observable<any[]>
   obj = {
    message : "",
    sender : "",
@@ -24,6 +25,7 @@ export class HomePage {
   };
   constructor( private car : ChatServiceService, public afAuth: AngularFireAuth) { 
     this.name = this.afAuth.auth.currentUser;
+    this.temp1 = this.car.getInfo();
     // this.temp = this.data.collection('ChatRooM').valueChanges();
     // console.log("database object")
     // console.log(this.temp)
@@ -40,21 +42,19 @@ export class HomePage {
     // console.log(this.obj.sender)
     // console.log(this.obj.recepient)
     // console.log(this.obj.message)
-
+    console.log(this.temp1)
     
   this.car.getInfo().subscribe(data => {
-    
-    this.temp = data.map ( e => {
-      return{
-        key: e.payload.doc.id,
-        ...e.payload.doc.data()
-      } as Rooms;
-    });
+    console.log(data)
+    this.temp = data;
    })
    console.log(this.temp)
    this.name = this.afAuth.auth.currentUser;
   }
 
+  getData(){
+    this.temp1 = this.car.getInfo();
+  }
   
   Gone(){
   console.log(this.car)

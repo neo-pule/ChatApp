@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatServiceService } from '../../chat-service.service';
 import { Camera, CameraOptions,  } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-
+import { AngularFireAuth } from '@angular/fire/auth';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-chat',
@@ -9,9 +11,46 @@ import { File } from '@ionic-native/file/ngx';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
-
-  constructor(private cam: Camera,private file :File) { }
+temp;
+  constructor(private dog :AngularFirestore,private cam: Camera,private file :File,public afAuth :AngularFireAuth, private obj:ChatServiceService ) {
+    console.log(this.afAuth.auth.currentUser)
+    this.temp = this.dog.collection('ChatRoom').valueChanges();
+    console.log(this.temp)
+   }
 photos : any[];
+date = Date.now();
+mess : string;
+writePost;
+
+item = {
+  userID : "",
+  email : "",
+  message : "",
+  name : "",
+  phoneNum : "0817713384",
+  time : Date.now()
+   
+ };
+
+sendEmj(){
+alert();
+}
+
+sendMsg(item){
+ this.obj.addData(this.item);
+ this.dog.collection('ChatRoom').add({
+   email : this.afAuth.auth.currentUser.email,
+   message : this.mess,
+   userID : this.afAuth.auth.currentUser.uid,
+   time : Date.now()
+ }).then(function(ref) {
+  console.log("document was written with ID : "+ ref);
+}).catch(function(){
+  console.log("error while processing ..")
+});
+
+
+}
   photo1(){
     console.log("ready ..")
   }

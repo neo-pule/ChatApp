@@ -26,10 +26,10 @@
 <ion-input [(ngModel)]="obj.message"></ion-input>
 <ion-button (click)="Gone()">Play</ion-button>
 <ion-button routerLink="/sign-in">page 1</ion-button>
-<ion-card *ngFor="let ob of temp">
- <p>welcome</p>
+<ion-card *ngFor="let tem of temp">
+ <p>{{tem.message}}</p>
 
 
 </ion-card>
-<ion-button (click)="getInfo()">submit</ion-button>
+<ion-button (click)="getData()">submit</ion-button>
 </ion-content>

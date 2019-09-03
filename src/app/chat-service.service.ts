@@ -18,12 +18,13 @@ export class ChatServiceService {
 
 
   addData(item){
-    this.temp = this.data.collection<any>('ChatRoom');
-    this.temp.add(item).then(() =>{
-
-      console.log("successful");
+    this.temp = this.data.collection('ChatRoom').add(item).then(function(ref) {
+      console.log("document was written with ID : "+ ref);
+    }).catch(function(){
+      console.log("error while processing ..")
     });
-  }
+    
+}
 
 
 }

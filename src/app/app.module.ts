@@ -15,7 +15,7 @@ import { MenuComponent } from './page/menu/menu.component';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-
+import {AutosizeModule} from 'ngx-autosize';
 
 
 const firebaseConfig = {
@@ -27,11 +27,11 @@ const firebaseConfig = {
   messagingSenderId: "170587772022",
   appId: "1:170587772022:web:f632f89de877c447"
 };
-
+firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [MenuComponent,AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),AppRoutingModule,AngularFireModule.initializeApp(firebaseConfig),AngularFirestoreModule],
+  imports: [BrowserModule,AutosizeModule, IonicModule.forRoot(),AppRoutingModule,AngularFirestoreModule,AngularFireModule.initializeApp(firebaseConfig),AngularFirestoreModule],
   providers: [
     StatusBar,
     Camera,
