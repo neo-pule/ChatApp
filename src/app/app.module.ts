@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
+import { FileTransfer} from '@ionic-native/file-transfer';
+
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -16,7 +19,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import {AutosizeModule} from 'ngx-autosize';
-
+import { FileChooser } from '@ionic-native/file-chooser';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBHSOM4RaqyWCag8QSlwouF01XXcv9G4bY",
@@ -34,11 +37,14 @@ firebase.initializeApp(firebaseConfig);
   imports: [BrowserModule,AutosizeModule, IonicModule.forRoot(),AppRoutingModule,AngularFirestoreModule,AngularFireModule.initializeApp(firebaseConfig),AngularFirestoreModule],
   providers: [
     StatusBar,
-    Camera,
-    File,
+  
+     Camera,
+     File,
     SplashScreen,
     AngularFireAuth,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    
+    
   ],
   bootstrap: [AppComponent]
 })

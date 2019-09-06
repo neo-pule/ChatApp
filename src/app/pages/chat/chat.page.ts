@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatServiceService } from '../../chat-service.service';
 import { Camera, CameraOptions,  } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { IonicConfig } from '@ionic/core';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-chat',
@@ -11,45 +14,74 @@ import {AngularFirestore} from '@angular/fire/firestore';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
-temp;
+
+@ViewChild(IonContent) Content :IonContent;
+
+
+  temp;
+  temp1;
+  authState;
+
   constructor(private dog :AngularFirestore,private cam: Camera,private file :File,public afAuth :AngularFireAuth, private obj:ChatServiceService ) {
     console.log(this.afAuth.auth.currentUser)
-    this.temp = this.dog.collection('ChatRoom').valueChanges();
+    this.temp = this.dog.collection('ChatRoom', obj => obj.orderBy("time") ).valueChanges();
     console.log(this.temp)
+    this.temp1 = localStorage.getItem('userid');
+    console.log(this.temp1)
+
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth
+    });
    }
 photos : any[];
 date = Date.now();
 mess : string;
 writePost;
-
+user = this.afAuth.auth.currentUser;
 item = {
   userID : "",
   email : "",
   message : "",
   name : "",
   phoneNum : "0817713384",
-  time : Date.now()
+  time : Date.now() 
    
  };
 
-sendEmj(){
-alert();
+ get authenticated(): boolean {
+  return this.authState !== null;
 }
 
+  get currentUser(): any {
+    return this.authenticated ? this.authState : null;
+  }
+
 sendMsg(item){
- this.obj.addData(this.item);
+  this.Content.scrollToBottom(200);
+ //this.obj.addData(this.item);
  this.dog.collection('ChatRoom').add({
    email : this.afAuth.auth.currentUser.email,
    message : this.mess,
    userID : this.afAuth.auth.currentUser.uid,
-   time : Date.now()
- }).then(function(ref) {
+   time : Date.now(),
+   name : this.afAuth.auth.currentUser.displayName
+}).then(function(ref) {
   console.log("document was written with ID : "+ ref);
 }).catch(function(){
   console.log("error while processing ..")
 });
+console.log(this.afAuth.auth.currentUser.email)
+console.log(this.afAuth.auth.currentUser.displayName)
+// this.item.push({
+//   userID : this.afAuth.auth.currentUser.uid,
+//   message : this.mess,
+//   name : "Neo",
+//   email : "",
+//   phoneNum : "0741634051",
+//   time :  Date.now()
+// })
 
-
+this.mess="";
 }
   photo1(){
     console.log("ready ..")

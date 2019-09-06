@@ -25,6 +25,7 @@ appVerifier;
 phone;
 user1;
 code;
+user ="Thapelo";
 provider;
 mail;
 pass;
@@ -59,6 +60,11 @@ IsDisable :boolean =false;
       // Handle Errors here.
       //var errorCode = error.code;
       //var errorMessage = error.message;
+      this.afAuth.auth.currentUser.updateProfile({
+        displayName : this.user,
+
+
+      })
       console.log(error)
       console.log("user logged In ..")
       this.data.navigateByUrl("/about/first-page/chat");
@@ -142,7 +148,7 @@ IsDisable :boolean =false;
         console.log("user logged In successful")
         console.log(user.user.uid)
         console.log(firebase.auth().currentUser.uid)
-     
+        this.data.navigateByUrl("/about/first-page/chat");
       } else {
         // User is signed out.
         // ...

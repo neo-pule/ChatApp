@@ -4,7 +4,7 @@ class Rooms  {
    
     message : String;
     name : string;
-    phoneNum : number;
+   
     time : Date;
     
   }

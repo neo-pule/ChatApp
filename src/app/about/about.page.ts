@@ -19,6 +19,11 @@ export class AboutPage implements OnInit {
       title: 'first-page',
       url: '/about/first-page',
       
+    },
+    {
+      title: 'on-chat',
+      url: '/about/on-chat',
+      
     }
   ]; 
 

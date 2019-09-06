@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>on-chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let x of itemList | async" (click)="clicked(x)">
+
+        <!-- {{x.name}} {{x.price}} {{x.type}} -->
+        {{x.uid}} -- {{x.name}}
+        <br>
+        {{x.userID}} 
+        <br>
+        {{x.email}} 
+        
+      </ion-item>
+</ion-content>

@@ -14,7 +14,16 @@ const routes: Routes = [
     children : [
       { 
         path: 'chat',
-         loadChildren: '../pages/chat/chat.module#ChatPageModule' },
+         loadChildren: '../pages/chat/chat.module#ChatPageModule' 
+      } ,
+      { 
+        path: 'profile',
+        loadChildren: '../pages/profile/profile.module#ProfilePageModule' 
+      },
+      { 
+        path: 'private-chat', 
+        loadChildren: '../pages/private-chat/private-chat.module#PrivateChatPageModule' 
+    }
     ]
   }
 ];

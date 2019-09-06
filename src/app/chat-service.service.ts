@@ -25,6 +25,11 @@ export class ChatServiceService {
     });
     
 }
-
+update(item){
+ 
+  this.itemDoc = this.data.doc<Rooms>('users/' + item.uid);
+  this.itemDoc.update(item);
+  console.log("updated");
+}
 
 }

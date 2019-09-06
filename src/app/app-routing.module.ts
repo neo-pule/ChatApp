@@ -8,6 +8,9 @@ const routes: Routes = [
   // { path: 'first-page', loadChildren: './first-page/first-page.module#FirstPagePageModule' },
   { path: 'sign-in', loadChildren: './pages/sign-in/sign-in.module#SignInPageModule' },
   { path: 'sign-up', loadChildren: './pages/sign-up/sign-up.module#SignUpPageModule' }
+  // { path: 'on-chat', loadChildren: './pages/on-chat/on-chat.module#OnChatPageModule' },
+  // { path: 'private-chat', loadChildren: './pages/private-chat/private-chat.module#PrivateChatPageModule' }
+ 
   // { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
 ];
 

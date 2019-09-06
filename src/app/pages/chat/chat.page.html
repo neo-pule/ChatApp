@@ -11,7 +11,7 @@
 
 <ion-list *ngFor="let photo of photos">
 <ion-item>
-    <img src={{photo}} style="width: 200px; height: 150px;">
+    <img src={{photo}} style="width: 200px; height: 150px;">  photos : any[];
 </ion-item>
 
   </ion-list> -->
@@ -26,26 +26,27 @@
     {{tem.time | date : 'short'}}
   </div>
 </div> -->
-  <ion-grid>
-    <ion-row >
-      <ion-col size="9" class="message other-msg" *ngFor="let tem of temp | async">
-        <h4>{{tem.name}}</h4>
-        <p>{{tem.userID}}</p>
+  <ion-grid *ngIf="afAuth.auth.currentUser">
+    <ion-row *ngFor="let tem of temp | async">
+      <ion-col size="9" class="message other-msg" *ngIf="tem.userID !== afAuth.auth.currentUser.uid">
+        <h4><strong>{{tem.name}}</strong></h4>
+        <p><strong>{{tem.userID}}</strong></p>
         <p>blah blah text ... </p>
         <p>{{tem.message}}</p>
         <div class="time" text-right>
           <br>
-          {{tem.time}}
+          {{tem.time | date : 'short'}}
         </div>
       </ion-col>
 
-      <ion-col offset="3" size="9" class="message my-msg">
-        <h4>{{temp}}</h4>
-        <p>{{temp1}}</p>
+      <ion-col offset="3" size="9" class="message my-msg" *ngIf="tem.userID === afAuth.auth.currentUser.uid">
+        <h4><strong>{{tem.name}}</strong></h4>
+        <p><strong>{{tem.userID}}</strong></p>
+        <p>{{tem.message}}</p>
         <p>blah blah text ... </p>
         <div class="time" text-right>
           <br>
-          {{date | date : 'short'}}
+          {{tem.time | date : 'short'}}
         </div>
       </ion-col>
 

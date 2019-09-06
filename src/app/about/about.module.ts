@@ -20,6 +20,9 @@ const routes: Routes = [
         path: 'first-page',
        loadChildren: '../first-page/first-page.module#FirstPagePageModule' 
       },
+      { path: 'on-chat',
+       loadChildren: '../pages/on-chat/on-chat.module#OnChatPageModule'
+       },
       {
         path : '',
         redirectTo:'/about/first-page'
